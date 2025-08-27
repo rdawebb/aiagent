@@ -1,16 +1,9 @@
-# import sys to check prompt input
-import sys
-
-# import api key
-import os
-from dotenv import load_dotenv
-
-# import Gemini
-from google import genai
-
-# import types
-from google.genai import types
-
+# import necessary libraries
+import os # import os to access environment variables
+import sys # import sys to check prompt input
+from dotenv import load_dotenv # import api key
+from google import genai # import Gemini
+from google.genai import types # import types
 
 # main function
 def main():
@@ -43,5 +36,6 @@ def main():
 
     print(response.text) # Gemini response
 
+# run main function
 if __name__ == "__main__":
     main()
