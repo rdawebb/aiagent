@@ -1,12 +1,11 @@
-# import get_file_content function
-from functions.get_file_content import get_file_content
+# import write_file function
+from functions.write_file import write_file
 
-# test get_file_content function
+# test write_file function
 def tests():
-    print(f"Result for test case 1: \n{get_file_content("calculator", "main.py")}") # test case 1
-    print(f"Result for test case 2: \n{get_file_content("calculator", "pkg/calculator.py")}") # test case 2
-    print(f"Result for test case 3: \n{get_file_content("calculator", "/bin/cat")}") # test case 3
-    print(f"Result for test case 4: \n{get_file_content("calculator", "pkg/does_not_exist.py")}") # test case 4
+    print(f"Result of test case 1: \n{write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")}") # test case 1
+    print(f"Result of test case 2: \n{write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")}") # test case 2
+    print(f"Result of test case 3: \n{write_file("calculator", "/tmp/temp.txt", "this should not be allowed")}") # test case 3
 
 # run tests
 if __name__ == "__main__":
