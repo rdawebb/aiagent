@@ -1,5 +1,5 @@
 # import run_python_file function
-from functions.run_python import run_python_file
+from functions.run_python_file import run_python_file
 
 # test run_python_file function
 def tests():

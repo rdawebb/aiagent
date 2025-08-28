@@ -4,10 +4,13 @@ import sys # import sys to check prompt input
 from dotenv import load_dotenv # import api key
 from google import genai # import Gemini
 from google.genai import types # import types
+
+# import functions
 from functions.get_files_info import schema_get_files_info  # import schema for get_files_info function
 from functions.get_file_content import schema_get_file_content  # import schema for get_file_content function
 from functions.write_file import schema_write_file  # import schema for write_file function
 from functions.run_python_file import schema_run_python_file  # import schema for run_python function
+from functions.call_function import call_function  # import call_function function
 
 # main function
 def main():
@@ -64,10 +67,16 @@ def main():
 
     # check if there are function calls
     if response.function_calls:
-        for function_call_part in response.function_calls:
-            print(f"Calling function: {function_call_part.name}({function_call_part.args})") # print function call name and arguments
-            return 
-    print(response.text) # Gemini response
+        for function_call_part in response.function_calls: # iterate over function calls
+            function_call_result = call_function(function_call_part) # call the appropriate function
+            
+            # check if function_call_result has a valid response
+            if not hasattr(function_call_result.parts[0], "function_response"):
+                raise Exception("No function response") # error if function call did not return a response
+
+            # check if verbose flag is set
+            if "--verbose" in sys.argv:
+                print(f"-> {function_call_result.parts[0].function_response.response}") # function call result
 
 # run main function
 if __name__ == "__main__":
