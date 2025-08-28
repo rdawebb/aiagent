@@ -1,6 +1,22 @@
 # import necessary libraries
 import os # import os to access environment variables
 from functions.config import MAX_CHARS # import max characters variable
+from google.genai import types  # import types
+
+# schema for get_file_content function
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Retrieves the content of a specific file, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The path to the file to retrieve, relative to the working directory.",
+            ),
+        },
+    ),
+)
 
 # get content of a file
 def get_file_content(working_directory, file_path):
