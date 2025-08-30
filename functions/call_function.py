@@ -3,18 +3,17 @@ import os # import os to access environment variables
 from google.genai import types  # import types
 
 # import functions
-from functions.get_files_info import get_files_info
-from functions.get_file_content import get_file_content
-from functions.write_file import write_file
-from functions.run_python_file import run_python_file
+from functions.get_files_info import get_files_info, schema_get_files_info
+from functions.get_file_content import get_file_content, schema_get_file_content
+from functions.write_file import write_file, schema_write_file
+from functions.run_python_file import run_python_file, schema_run_python_file
 
-# create a mapping of function names to function objects
-function_map = {
-        "get_files_info": get_files_info,
-        "get_file_content": get_file_content,
-        "write_file": write_file,
-        "run_python_file": run_python_file
-    }
+# define available functions for Gemini
+available_functions = types.Tool(
+    function_declarations=[
+        schema_get_files_info, schema_get_file_content, schema_write_file, schema_run_python_file
+    ]
+)
 
 # call the appropriate function based on the function call part
 def call_function(function_call_part, verbose=False):
@@ -26,6 +25,14 @@ def call_function(function_call_part, verbose=False):
         print(f"Calling function: {function_name}({args})")
     else:
         print(f"- Calling function: {function_name}")
+
+    # create a mapping of function names to function objects
+    function_map = {
+        "get_files_info": get_files_info,
+        "get_file_content": get_file_content,
+        "write_file": write_file,
+        "run_python_file": run_python_file
+    }
 
     args["working_directory"] = "./calculator" # add working_directory to the arguments
 

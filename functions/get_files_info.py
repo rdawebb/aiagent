@@ -33,7 +33,7 @@ def get_files_info(working_directory, directory="."):
             return f"Error: '{directory}' is not a directory"
 
         # list files and directories in the target directory
-        files_info = []
+        files_info = [] # list to store file information
         for items in os.listdir(target_directory):
             item_path = os.path.join(target_directory, items) # construct the absolute path
             size = os.path.getsize(item_path) # get the size of the file or directory
