@@ -1,4 +1,3 @@
-# system prompt to instruct Gemini on its capabilities
 system_prompt = """
     You are a helpful AI coding agent.
 
